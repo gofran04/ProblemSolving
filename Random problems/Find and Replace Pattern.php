@@ -15,7 +15,7 @@ Input: words = ["a","b","c"], pattern = "a"
 Output: ["a","b","c"]
 */
 
-$words = ["abc","deq","mee","aqq","dkd","ccc"]; $pattern = "baba";// re ["mee","aqq"]
+$words = ["abc","deq","mee","aqq","dkd","ccc"]; $pattern = "abb";// re ["mee","aqq"]
 // $words = ["badc","abab","dddd","dede","yyxx"]; $pattern = "baba"; // re ["abab","dede"]
 // $words = ["a","b","c"]; $pattern = "a"; // re  ["a","b","c"]
 
@@ -41,5 +41,30 @@ for ($i=0; $i < $pattern_len; $i++)
  $pattern1["$pattern[$i]"] = $the_pattern;
 }
 
+for ($k=0; $k < $words_len; $k++) 
+{
+    $pattern2 = [];
+    $str = $words[$k];
+    $len = strlen($words[$k]);
+    for ($i=0; $i < $len; $i++) 
+    {
+        $the_pattern = "";
+        $the_pattern = $i;
+        for ($j=0; $j < $len; $j++)
+        {
+            if($i == $j)
+            continue;
+
+            if($str[$i] == $str[$j])
+            $the_pattern = $j . $the_pattern;
+        }
+        $pattern2["$str[$i]"] = $the_pattern;
+    }
+
+    if(array_values($pattern1) == array_values($pattern2))
+    {
+        array_push($arr,$words[$k]);
+    }
+}
 print_r($arr);
 ?>
